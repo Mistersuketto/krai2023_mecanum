@@ -1,34 +1,48 @@
 // variabel kecepatan arah x, y dan kecepatan rotasi
 int Vx1;
-int Vy1;
-int Vw1;
 int Vx2;
+
+int Vy1;
 int Vy2;
+
+int Vw1;
 int Vw2;
 
-// -- Masukan pada Pin PWM
-
+// Masukan pada Pin PWM
 // motor1
-#define R1_PWM 4
-#define L1_PWM 5
+#define R1_PWM 11
+#define L1_PWM 10
 
 // motor2
-#define R2_PWM 6
-#define L2_PWM 7
+#define R2_PWM 9
+#define L2_PWM 8
 
 // motor3
-#define R3_PWM 8
-#define L3_PWM 9
+#define R3_PWM 7
+#define L3_PWM 6
 
 // motor4
-#define R4_PWM 10
-#define L4_PWM 11
+#define R4_PWM 5
+#define L4_PWM 4
 
 
 void setup() {
-  // inisialisasikan pin PWM sebagai OUTPUT
 
+  // memanggil fungsi serial
   Serial.begin(9600);
+
+  Serial.println("1. Vx+");
+  Serial.println("2. Vx-");
+  Serial.println("3. Vy+");
+  Serial.println("4. Vy-");
+  Serial.println("5. Vx+ Vy+");
+  Serial.println("6. Vx- Vx-");
+  Serial.println("7. Vx- Vy+");
+  Serial.println("8. Vx+ Vy-");
+  Serial.println("9. Vw+");
+  Serial.println("10. Vw-");
+  
+  // inisialisasikan pin PWM sebagai OUTPUT
   // motor1
   pinMode (R1_PWM, OUTPUT);
   pinMode (L1_PWM, OUTPUT);
@@ -44,216 +58,251 @@ void setup() {
   // motor4
   pinMode (R4_PWM, OUTPUT);
   pinMode (L4_PWM, OUTPUT);
+
 }
 
 void loop() {
-  // gerakan robot Vx+
-  if (Vx1)  {
-  // motor1
-  analogWrite (R1_PWM, 120);
-  analogWrite (L1_PWM, 0);
 
-  // motor2
-  analogWrite (R2_PWM, 120);
-  analogWrite (L2_PWM, 0);
+  Serial.print(" ");
+  Serial.println("Pilih gerakan robot:");
+  while (Serial.available() == 0) {
+    
+  }
 
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 120);
+  int pilihgerakan = Serial.parseInt();
 
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 120);
+  switch (pilihgerakan) {
+    case 1:
+      // gerakan robot Vx+
+      Serial.print("gerak kanan (Vx+)");
+      // motor1
+      analogWrite (R1_PWM, 120);
+      analogWrite (L1_PWM, 0);
 
-  delay(5000);}
-  //========================================================
+      // motor2
+      analogWrite (R2_PWM, 120);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 120);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 120);
+    
+      delay(5000);
+      break;
+//======================================================== case1_Vx+
 
-  // gerakan robot Vx-
-  if (Vx2)  {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 120);
+    case 2:
+      // gerakan robot Vx-
+      Serial.print("gerak kiri (Vx-)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 120);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 120);
+    
+      // motor3
+      analogWrite (R3_PWM, 120);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 120);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case2_Vx-
 
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 120);
+     case 3:
+      // gerakan robot Vy+
+      Serial.print("gerak maju (Vy+)");
+      // motor1
+      analogWrite (R1_PWM, 120);
+      analogWrite (L1_PWM, 0);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 120);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 120);
+    
+      // motor4
+      analogWrite (R4_PWM, 120);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case3_Vy+
 
-  // motor3
-  analogWrite (R3_PWM, 120);
-  analogWrite (L3_PWM, 0);
+     case 4:
+      // gerakan robot Vy-
+      Serial.print("gerak mundur (Vy-)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 120);
+    
+      // motor2
+      analogWrite (R2_PWM, 120);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 120);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 120);
+    
+      delay(5000);
+      break;
+//======================================================== case4_Vy-
 
-  // motor4
-  analogWrite (R4_PWM, 120);
-  analogWrite (L4_PWM, 0);
+     case 5:
+      // gerakan robot Vx+ Vy+
+      Serial.print("gerak serong kanan maju (Vx+ Vy+)");
+      // motor1
+      analogWrite (R1_PWM, 120);
+      analogWrite (L1_PWM, 0);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 120);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case5_Vx+_Vy+
 
-  delay(5000);}
-  //========================================================
+     case 6:
+      // gerakan robot Vx- Vy-
+      Serial.print("gerak serong kiri mundur (Vx- Vy-)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 120);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 120);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case6_Vx-_Vy-
 
-  // gerakan robot Vy+
-  if (Vy1)  {
-  // motor1
-  analogWrite (R1_PWM, 120);
-  analogWrite (L1_PWM, 0);
+     case 7:
+      // gerakan robot Vx- Vy+
+      Serial.print("gerak serong kiri maju (Vx- Vy+)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 0);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 120);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 120);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case7_Vx-_Vy+
 
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 120);
+     case 8:
+      // gerakan robot Vx+ Vy-
+      Serial.print("gerak serong kanan mundur (Vx+ Vy-)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 0);
+    
+      // motor2
+      analogWrite (R2_PWM, 120);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 120);
+    
+      delay(5000);
+      break;
+//======================================================== case8_Vx+_Vy-
 
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 120);
+     case 9:
+      // gerakan robot Vw+
+      Serial.print("gerak rotasi cw (Vw+)");
+      // motor1
+      analogWrite (R1_PWM, 120);
+      analogWrite (L1_PWM, 0);
+    
+      // motor2
+      analogWrite (R2_PWM, 120);
+      analogWrite (L2_PWM, 0);
+    
+      // motor3
+      analogWrite (R3_PWM, 120);
+      analogWrite (L3_PWM, 0);
+    
+      // motor4
+      analogWrite (R4_PWM, 120);
+      analogWrite (L4_PWM, 0);
+    
+      delay(5000);
+      break;
+//======================================================== case9_Vw+
 
-  // motor4
-  analogWrite (R4_PWM, 120);
-  analogWrite (L4_PWM, 0);
+     case 10:
+      // gerakan robot Vw-
+      Serial.print("gerak rotasi ccw (Vw-)");
+      // motor1
+      analogWrite (R1_PWM, 0);
+      analogWrite (L1_PWM, 120);
+    
+      // motor2
+      analogWrite (R2_PWM, 0);
+      analogWrite (L2_PWM, 120);
+    
+      // motor3
+      analogWrite (R3_PWM, 0);
+      analogWrite (L3_PWM, 120);
+    
+      // motor4
+      analogWrite (R4_PWM, 0);
+      analogWrite (L4_PWM, 120);
+    
+      delay(5000);
+      break;
+//======================================================== case10_Vw-
 
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vy-
-  if (Vy2)  {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 120);
-
-  // motor2
-  analogWrite (R2_PWM, 120);
-  analogWrite (L2_PWM, 0);
-
-  // motor3
-  analogWrite (R3_PWM, 120);
-  analogWrite (L3_PWM, 0);
-
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 120);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vx+ Vy+
-  if (Vx1, Vy1) {
-  // motor1
-  analogWrite (R1_PWM, 120);
-  analogWrite (L1_PWM, 0);
-
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 0);
-
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 120);
-
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 0);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vx- Vy-
-  if (Vx2, Vy2) {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 120);
-
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 0);
-
-  // motor3
-  analogWrite (R3_PWM, 120);
-  analogWrite (L3_PWM, 0);
-
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 0);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vx- Vy+
-  if (Vx2, Vy1) {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 0);
-
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 120);
-
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 0);
-
-  // motor4
-  analogWrite (R4_PWM, 120);
-  analogWrite (L4_PWM, 0);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vx+ Vy-
-  if (Vx1, Vy2) {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 0);
-
-  // motor2
-  analogWrite (R2_PWM, 120);
-  analogWrite (L2_PWM, 0);
-
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 0);
-
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 120);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vw+
-  if (Vw1) {
-  // motor1
-  analogWrite (R1_PWM, 120);
-  analogWrite (L1_PWM, 0);
-
-  // motor2
-  analogWrite (R2_PWM, 120);
-  analogWrite (L2_PWM, 0);
-
-  // motor3
-  analogWrite (R3_PWM, 120);
-  analogWrite (L3_PWM, 0);
-
-  // motor4
-  analogWrite (R4_PWM, 120);
-  analogWrite (L4_PWM, 0);
-
-  delay(5000);}
-  //========================================================
-
-  // gerakan robot Vw-
-  if (Vw1) {
-  // motor1
-  analogWrite (R1_PWM, 0);
-  analogWrite (L1_PWM, 120);
-
-  // motor2
-  analogWrite (R2_PWM, 0);
-  analogWrite (L2_PWM, 120);
-
-  // motor3
-  analogWrite (R3_PWM, 0);
-  analogWrite (L3_PWM, 120);
-
-  // motor4
-  analogWrite (R4_PWM, 0);
-  analogWrite (L4_PWM, 120);
-
-  delay(5000);} 
-  //========================================================
+    default:
+      Serial.println("yg bener kntl");
+  }
 }
